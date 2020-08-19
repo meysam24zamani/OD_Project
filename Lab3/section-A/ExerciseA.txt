@@ -1,0 +1,129 @@
+1. Get the classes deﬁned in the ontology.
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?x WHERE { 
+  ?x    rdf:type  owl:Class . 
+}
+
+2. Get the datatype properties deﬁned in the ontology.
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?x
+WHERE {    
+   ?x rdf:type owl:DatatypeProperty.
+}
+
+3. Get the object properties deﬁned in the ontology. What is the diﬀerence between datatype and object properties?
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?x
+WHERE {    
+   ?x rdf:type owl:ObjectProperty .
+}
+
+4. Get the labels of all the properties (both datatype and object) deﬁned in the ontology.
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?label1 WHERE {
+        ?x rdf:type ?z.
+    	?x rdfs:label ?label1.
+    	FILTER (?z = owl:DatatypeProperty ||  ?z = owl:ObjectProperty)
+        FILTER (lang(?label1) = "en")
+        
+} 
+
+As commented earlier, it is important to notice that the semantics of the knowledge graph are determined by diﬀerent namespaces, which are deﬁned by the ”preﬁx” keyword at the beginning of the query. Thus, it is important to identify and understand the namespaces used in a dataset.
+5. Find the class representing an Actor in the dataset (using ﬁlters).
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x ?z WHERE {
+    ?x rdfs:label ?label1.
+    filter contains(?label1,"actor")     
+  	filter langMatches(lang(?label1),'en')
+}
+ 
+6. Find the super class for the class Actor.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x 
+WHERE {
+   onto:Actor rdfs:subClassOf ?x .
+}
+7. Find all the actors in the dataset.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x 
+WHERE {
+  	?x rdf:type onto:Actor.
+}
+
+8. Get diﬀerent classes that are deﬁned as range of the properties that have the class Actor deﬁned as their domain.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?y
+WHERE {
+    ?x rdfs:range ?y.
+    ?x rdfs:domain onto:Actor.
+}
+
+9. Find the super property of the goldenRaspberryAward property.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x
+WHERE {
+   	onto:goldenRaspberryAward rdfs:subPropertyOf ?x.
+}
+
+10. Return all the properties that have the class Actor as either their range or domain.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x
+WHERE {
+   	?x ?y onto:Actor.
+    FILTER (?y = rdfs:range ||  ?y = rdfs:domain)
+}
+
+11. Return all persons that are not actors.
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x 
+WHERE {
+  	?x rdf:type onto:Person.
+    MINUS { ?x rdf:type onto:Actor }
+}
+
+12. Return the path (in properties and classes) between the Actor and Person classes.
+
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?mid
+WHERE {
+    onto:Actor rdfs:subClassOf+ ?mid.
+    ?mid rdfs:subClassOf+ onto:Person.
+}
+
+OR
+
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?p1 ?c1 ?p2
+WHERE {
+    onto:Actor ?p1 ?c1.
+    ?c1 ?p2 onto:Person
+    
+}
+
+OR
+
+PREFIX onto: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://dbpedia.org/ontology/>
+SELECT ?x ?p ?y 
+WHERE {
+    onto:Actor (:|!:)* ?mid .
+  	?mid (:|!:)* ?x .
+  	?x ?p ?y. 
+  	?y (:|!:)* onto:Person
+}
+group by ?x ?p ?y 

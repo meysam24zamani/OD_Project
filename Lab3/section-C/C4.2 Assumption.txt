@@ -1,0 +1,6 @@
+Assumption: Due to not having access to the ontology on the second set of queries, 
+one way of adapting the queries is to filter all classes in the environment and
+finding the required ones according to their name (converted to String). While in some
+situations this might retrieve information from unrelated sources, we assume and we made
+sure to filter them in a way that these classes contain the information needed without 
+referencing the TBOX. 

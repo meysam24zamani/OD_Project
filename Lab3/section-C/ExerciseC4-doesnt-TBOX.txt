@@ -1,0 +1,88 @@
+Write two versions for each of the following queries (one exploiting the TBOX, and another assuming the TBOX does not exist).
+Please explicitly state any assumptions you make.
+
+Using TBOX:
+
+1. Find all the Authors.
+
+PREFIX academic: <http://www.semanticweb.org/vsend/ontologies/2020/3/academic#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x 
+WHERE { 
+    ?x rdf:type academic:Author.
+}
+
+2. Find all the properties whose domain is Author.
+PREFIX academic: <http://www.semanticweb.org/vsend/ontologies/2020/3/academic#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x WHERE { 
+  ?x rdfs:domain academic:Author. 
+}
+
+3. Find all the properties whose domain is either Conference or Journal.
+PREFIX academic: <http://www.semanticweb.org/vsend/ontologies/2020/3/academic#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x
+WHERE {
+   	?x rdfs:domain ?z.
+    FILTER (?z = academic:Conference ||  ?z = academic:Journal)
+}
+
+4. Find all the things that Authors have created (either Reviews or Papers).
+
+PREFIX academic: <http://www.semanticweb.org/vsend/ontologies/2020/3/academic#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x ?y ?z ?t
+WHERE {
+    ?x ?y ?z.
+    ?z rdf:type ?t.
+    ?x rdf:type ?a
+    FILTER (?a = academic:Author || ?a = academic:Reviewer)
+    FILTER (?t = academic:PaperReview || ?t = academic:Paper) 
+    
+}
+
+Assumming TBOX does not exist:
+
+
+1. Find all the Authors.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x ?t
+WHERE { 
+    ?x rdf:type ?t.
+    filter contains(str(?t),"Author")
+}
+
+
+2. Find all the properties whose domain is Author.
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x WHERE { 
+  ?x rdfs:domain ?t. 
+  filter contains(str(?t),"Author")
+}
+
+
+3. Find all the properties whose domain is either Conference or Journal.
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?x
+WHERE {
+   	?x rdfs:domain ?z.
+    FILTER (strEnds(str(?z),"Conference") ||  strEnds(str(?z),"Journal"))
+}
+
+
+4. Find all the things that Authors have created (either Reviews or Papers).
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?x ?y ?z ?t
+WHERE {
+    ?x ?y ?z.
+    ?z rdf:type ?t.
+    ?x rdf:type ?a
+    FILTER (strEnds(str(?a),"Author") || strEnds(str(?a),"Reviewer"))
+    FILTER (strEnds(str(?t),"PaperReview") || strEnds(str(?t),"Paper")) 
+    
+}

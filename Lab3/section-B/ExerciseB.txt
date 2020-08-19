@@ -1,0 +1,147 @@
+1. List the country, station type, latitude, and longitude details of each station.
+
+PREFIX sch: <http://qweb.cs.aau.dk/airbase/schema/>
+PREFIX prop: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT str(?country_name) as ?country, str(?type_name) as ?station_type, ?latit, ?longit
+WHERE {
+?station prop:type ?type_name.
+?station prop:latitudeDegree ?latit.
+?station prop:longitudeDegree ?longit .
+?station sch:inCountry ?country.
+?country prop:country ?country_name.
+}
+
+
+2. List the 10 highest averages of C6H6 emission and the country and the year on which
+they were recorded.
+
+PREFIX sch: <http://qweb.cs.aau.dk/airbase/schema/>
+PREFIX prop: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?c6h6, str(?country_name) as ?country, ?year WHERE {
+?obs sch:C6H6 ?c6h6 .
+?obs sch:sensor ?sensor .
+?sensor prop:statisticShortName "Mean"^^xsd:string .
+?obs sch:station ?station .
+?station sch:inCountry ?IRI .
+?IRI prop:country ?country_name .
+?obs sch:year ?yr .
+?yr prop:yearNum ?year .
+}
+ORDER BY DESC (?c6h6)
+LIMIT 10
+
+
+3. For each city and property type, give the yearly average emission for NO2, SO2, PB,
+and PM10.
+
+PREFIX prop: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX sch: <http://qweb.cs.aau.dk/airbase/schema/>
+SELECT str(?type) as ?Station_type, str(?city_name) as ?City_name, avg(?no2) as ?no2_Value, avg(?so2) as ?so2_Value, avg(?pb) as ?pb_value, avg(?pm10) as ?pm10_value
+WHERE {
+{
+?station sch:inCity ?city.
+?city prop:city ?city_name.
+?station prop:type ?type.
+?observation sch:station ?station.
+?observation sch:NO2 ?no2.
+}UNION{
+?station sch:inCity ?city.
+?city prop:city ?city_name.
+?station prop:type ?type.
+?observation sch:station ?station.
+?observation sch:SO2 ?so2.
+}UNION{
+?station sch:inCity ?city.
+?city prop:city ?city_name.
+?station prop:type ?type.
+?observation sch:station ?station.
+?observation sch:Pb ?pb.
+}UNION{
+?station sch:inCity ?city.
+?city prop:city ?city_name.
+?station prop:type ?type.
+?observation sch:station ?station.
+?observation sch:PM10 ?pm10.
+}}
+ORDER BY ASC(?type)
+
+
+4. Dedine 3 additional SPARQL queries (and their corresponding interpretation) that you
+think could be interesting for the domain of analyzing air quality/pollution.
+
+
+First: Display the country and city names (without including their IRI), type of pollutant and their values in 2010. Sort the output.
+
+PREFIX sch: <http://qweb.cs.aau.dk/airbase/schema/>
+PREFIX prop: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+SELECT str(?country_name) as ?country str(?city_name) as ?city ?pollutant ?value WHERE {
+?station prop:type ?type .
+?obs sch:station ?station .
+?station prop:type "Industrial"^^xsd:string.
+?obs rdf:type qb:Observation .
+?obs ?p ?value .
+?station sch:inCountry ?countryiri .
+?countryiri prop:country ?country_name.
+?station sch:inCity ?cityy .
+?cityy prop:city ?city_name.
+?obs sch:sensor ?sensors .
+?sensors sch:measures ?component .
+?component prop:caption ?pollutant.
+FILTER (isLiteral(?value))
+?obs sch:year ?year .
+?year prop:yearNum "2010"^^xsd:integer .
+} GROUP BY ?country_name ?city_name ?pollutant
+order by desc (?value)
+
+
+Second: For all the background stations, display the top 25 countries where O3 had maximum values until 2014.
+
+PREFIX schema: <http://qweb.cs.aau.dk/airbase/schema/>
+PREFIX property: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?country ?yn (max(?o3) as ?maxo3) WHERE {
+?s property:type ?b .
+?s property:ozoneClassification ?class .
+?obs schema:station ?s .
+?obs schema:O3 ?o3 .
+?obs schema:year ?year .
+?year property:yearNum ?yn .
+{ ?s schema:inCity ?city .
+?city schema:locatedIn ?country .
+} UNION {
+?s schema:inCountry ?country .
+}
+?obs schema:sensor ?sensor .
+?sensor property:statisticShortName "Max"^^xsd:string .
+FILTER(?b = "Background"^^xsd:string && ?yn >= 2000 && ?yn <= 2014 && ?o3 >300 )
+} GROUP BY ?country ?yn ?o3
+order by desc(?o3)
+limit 25
+
+Third: Display 50 country names having the highest values of emitted CO including the start and end date when those values are measured.
+
+PREFIX sch: <http://qweb.cs.aau.dk/airbase/schema/>
+PREFIX prop: <http://qweb.cs.aau.dk/airbase/property/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+select str(?country_name) as ?country (max(?co) as ?maxco) ?startdate ?enddate
+where{
+?observation sch:CO ?co.
+?observation sch:station ?station.
+?station sch:inCountry ?countryiri .
+?countryiri prop:country ?country_name.
+?observation sch:sensor ?sensor .
+?sensor prop:startDate ?startdate.
+?sensor prop:endDate ?enddate .
+?observation sch:year ?yearN.
+?sensor prop:statisticShortName "Max"^^xsd:string.
+}
+order by desc (?co)
+limit 50
+

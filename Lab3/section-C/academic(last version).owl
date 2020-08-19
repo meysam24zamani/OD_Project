@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#"
+     xml:base="http://www.semanticweb.org/vsend/ontologies/2020/3/academic"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:academic="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#VolumeOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#VolumeOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Journal"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#editionOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#editionOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceEdition"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Conference"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#hasKeyword -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#hasKeyword">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Keyword"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#publishedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#publishedIn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewOf">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviews -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviews">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Reviewer"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#writes -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#writes">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Author"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Conference"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DOI -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DOI">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ISBN -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ISBN">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Journal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#age -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#age">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#articleTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#articleTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#edition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#edition">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceEdition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#email -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#email">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#keywordName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#keywordName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Keyword"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#location -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#location">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceEdition"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#nPages -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#nPages">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#name">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#nationality -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#nationality">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#publicationName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#publicationName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewDecision -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewDecision">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#reviewName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#volume -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#volume">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#yearPublished -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#yearPublished">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Author -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Author">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Conference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Conference"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceEdition -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ConferenceEdition">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DatabaseConference -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DatabaseConference">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Conference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DemoPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DemoPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#FullPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#FullPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Journal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Journal"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#JournalVolume">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Keyword -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Keyword"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#OpenAccessJournal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#OpenAccessJournal">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Journal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#PaperReview"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Publications"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Reviewer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Reviewer">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ShortPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ShortPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vsend/ontologies/2020/3/academic#SurveyPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#SurveyPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#DemoPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#FullPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#ShortPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/vsend/ontologies/2020/3/academic#SurveyPaper"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
